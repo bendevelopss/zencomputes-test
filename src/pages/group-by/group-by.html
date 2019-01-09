@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar>
+      <ion-buttons start> </ion-buttons>
+      <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+      <ion-title> Group Page </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+  <ion-list style="border: solid 2px #E7717D" *ngIf="inventory.length" >
+    <ng-container *ngFor="let item of inventory">
+      <ion-item-divider color="light">{{item.key}}</ion-item-divider>
+      <ion-item *ngFor="let child of item.value">{{'warehouse_id: ' + child.warehouse_id + '   ' +'stock: ' + child.stock }}</ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-list *ngIf="!inventory.length" style="border: solid 2px #E7717D">
+      <ion-item *ngFor="let item of inventories">{{'item_id: ' + item.item_id + '   ' +'warehouse_id: ' + item.warehouse_id + '   ' +'stock: ' + item.stock }}</ion-item>
+  </ion-list>
+  <div padding>
+    <button (tap)="groupBy()" ion-button round outline color="danger">Generate</button>
+    <button (tap)="clear()" ion-button round outline color="danger">Reset</button>
+  </div>
+</ion-content>

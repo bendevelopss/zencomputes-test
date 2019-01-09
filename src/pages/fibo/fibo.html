@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start> </ion-buttons>
+    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-title> Fibonacci Page </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="container">
+    <ion-item>
+      <ion-label fixed>Minimum</ion-label>
+      <ion-input type="number" [(ngModel)]="min"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Maximum</ion-label>
+      <ion-input type="number" [(ngModel)]="max"></ion-input>
+    </ion-item>
+    <div padding>
+      <button (tap)="generate()" ion-button color="danger" block>
+        Generate
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="fiboNumbers.length > 0">
+    <ion-item no-lines> <h2>Generated Fiboacci</h2> </ion-item>
+    <ion-item no-lines style="border: solid 1px grey">
+      <label
+        *ngFor="let number of fiboNumbers; let i = index"
+        text-center
+        style="white-space: normal"
+        >{{ number + (i != fiboNumbers.length - 1 ? ", " : "") }}</label
+      >
+    </ion-item>
+  </div>
+</ion-content>

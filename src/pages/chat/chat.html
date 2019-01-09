@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start> </ion-buttons>
+    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-title> Chat Page </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="chat-container">
+    <h5 *ngIf="disabled">Click the "+" button to continue</h5>
+    <ng-container *ngFor="let window of chatWindows; let i = index">
+      <div class="chat-window">
+        <div class="chat-title">
+          <span>{{ window.title }}</span>
+        </div>
+
+        <div #chatContainer class="chat-bubble-container">
+          <ion-note ion-text style="color: grey">{{ window.alert }}</ion-note
+          ><br />
+          <div
+            class="chat-bubble"
+            [class.from-me]="chat.from == window.title"
+            *ngFor="let chat of chatMessages"
+          >
+            <span> {{ chat.from + ": " + chat.message }} </span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <label style="color: red">{{window.title}}</label>
+          <ion-input
+            [(ngModel)]="inputText[window.title]"
+            placeholder="Text Input"
+          ></ion-input>
+          <button
+            (tap)="sendMesasge(window.title)"
+            ion-button
+            round
+            color="danger"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ion-fab bottom right>
+    <button (tap)="addChatWindow()" ion-fab icon-only color="danger" [disabled]="chatWindows.length == 4">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
